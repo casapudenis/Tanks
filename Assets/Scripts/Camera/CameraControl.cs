@@ -30,7 +30,6 @@ public class CameraControl : MonoBehaviour
     private void Move()
     {
         FindAveragePosition();
-
         transform.position = Vector3.SmoothDamp(transform.position, m_DesiredPosition, ref m_MoveVelocity, m_DampTime);
     }
 
@@ -39,7 +38,6 @@ public class CameraControl : MonoBehaviour
     {
         Vector3 averagePos = new Vector3();
         int numTargets = 0;
-
         for (int i = 0; i < m_Targets.Length; i++)
         {
             if (!m_Targets[i].gameObject.activeSelf)
@@ -48,12 +46,9 @@ public class CameraControl : MonoBehaviour
             averagePos += m_Targets[i].position;
             numTargets++;
         }
-
         if (numTargets > 0)
             averagePos /= numTargets;
-
         averagePos.y = transform.position.y;
-
         m_DesiredPosition = averagePos;
     }
 

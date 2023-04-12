@@ -15,15 +15,12 @@ public class TankHealth : MonoBehaviour
     private float m_CurrentHealth;  
     private bool m_Dead;            
 
-
     private void Awake()
     {
         m_ExplosionParticles = Instantiate(m_ExplosionPrefab).GetComponent<ParticleSystem>();
         m_ExplosionAudio = m_ExplosionParticles.GetComponent<AudioSource>();
-
         m_ExplosionParticles.gameObject.SetActive(false);
     }
-
 
     private void OnEnable()
     {

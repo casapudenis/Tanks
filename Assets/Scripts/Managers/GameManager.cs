@@ -17,17 +17,33 @@ public class GameManager : MonoBehaviour
     private WaitForSeconds m_StartWait;         
     private WaitForSeconds m_EndWait;         
     private TankManager m_RoundWinner;       
-    private TankManager m_GameWinner;          
+    private TankManager m_GameWinner;  
+
+
+    float currentTime = 0f;
+    float startingTime = 300f;
+    [SerializeField] Text countdownText; 
 
     private void Start()
     {
         m_StartWait = new WaitForSeconds (m_StartDelay);
         m_EndWait = new WaitForSeconds (m_EndDelay);
+        currentTime=startingTime;
         SpawnAllTanks();
         SetCameraTargets();
         StartCoroutine (GameLoop ());
     }
 
+    private void Update()
+    {
+        currentTime-=1*Time.deltaTime;
+        countdownText.text=currentTime.ToString("0");
+        if(currentTime<=0)
+        {
+            m_MessageText.text = "DRAW! YOU RAN OUT OF TIME!";
+            Time.timeScale = 0f;
+        }
+    }
 
     private void SpawnAllTanks()
     {
